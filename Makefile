@@ -70,6 +70,9 @@ push: githook
 	git push origin --all
 	git push origin --tags
 
+release-note:
+	pipenv run reno report
+
 # aliases to gracefully handle typos on poor dev's terminal
 check: checks
 devel: dev
