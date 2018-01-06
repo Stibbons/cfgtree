@@ -6,8 +6,6 @@ language: python
 python:
   - 3.6
   - 3.5
-  - 3.4
-  - 2.7
 
 install:
   - pip install -U pip pipenv
@@ -27,7 +25,7 @@ deploy:
   user: stibbons
   distributions: sdist bdist_wheel
   password:
-    secure: PLEASE_REPLACE_ME
+    secure: jmxqrciBDaJjozAMM+Y56gfJ1h3NdKXEaR5cbfDXAPdkTKsqAormPaugKDfKDja7bHd4o0cMVZLB8SVUwv7rG3VDu9oTHiujr6kiPfx6Zltpma6FRdnvOzYcCf/GHEmAhNIbMvTuoD6U84pAojBCP+Z3daWzWtHatagCUZxP72AA3l9CF8CF8BgzxIcAxHs+tLxjKCjLRdcNOfXBj7FSm8jTOG529IhGaSJgZ0+T8zyKpsE9PvXlxYzsMZMyCqBnyNsU25hGIRERmL2ghWcvhBCiNmLsNT1SgIXZvPEES2+F16e0jojcjIGZwZHHcZfOHUXjZQ18t/OAt8U3hZDoA8saFAproRe38KDlimvmdnN39t0p0eRFEPEix942t49CkLyjbEdEZf40HG8IFEZlydca24o7mTdxjp48F2wObYI1+Xz8+ZkMLvlsAufHYjSiWsbVU6AuThmOjqFpX0SnTEUvGQXNZzDBdEPE9RSVZUrqd0lKIa3AOS8NIlnellVOalSl8XN9OT2LRCrctE66sc69MONBKwEglPGdAKf/FMXxS/DrsskA1dSOg7YALehEvnZG7AwXqJY/dGScb5j5J12mVPQFxZ2kzHAuGuzXa7UPVPx7p+iQqDvYBpmgsoGggLVDYRnqm3bNDeRuRKDlMCMiWhpAAt/UGzjdIFRw5rs=
   on:
     tags: true
     repo: Stibbons/cfgtree
