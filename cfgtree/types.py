@@ -4,15 +4,16 @@
 import argparse
 import logging
 import os
-from typing import Any
 
 log = logging.getLogger(__name__)
 _UNDEFINED = object()
 
+# flake8: E741
+
 
 class _CfgBase(object):
 
-    default: Any = None
+    default = None
     name = None
     xpath = None
     arg_type = None

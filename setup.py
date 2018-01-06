@@ -1,3 +1,5 @@
+# coding: utf-8
+
 # Third Party Libraries
 import setuptools
 
@@ -9,5 +11,4 @@ try:
 except ImportError:
     pass
 
-setuptools.setup(setup_requires=['pbr'],
-                 pbr=True)
+setuptools.setup(setup_requires=['pbr'], pbr=True)

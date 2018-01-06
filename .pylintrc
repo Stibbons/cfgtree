@@ -58,6 +58,7 @@ disable=invalid-name,
     ungrouped-imports,
     unexpected-keyword-arg,
     no-self-use,
+    inconsistent-return-statements,
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -94,7 +95,7 @@ score=yes
 [REFACTORING]
 
 # Maximum number of nested blocks for function / method body
-max-nested-blocks=5
+max-nested-blocks=6
 
 
 [LOGGING]
@@ -355,7 +356,7 @@ max-attributes=35
 max-bool-expr=5
 
 # Maximum number of branch for function / method body
-max-branches=12
+max-branches=15
 
 # Maximum number of locals for function / method body
 max-locals=15
@@ -367,7 +368,7 @@ max-parents=7
 max-public-methods=20
 
 # Maximum number of return / yield for function / method body
-max-returns=6
+max-returns=7
 
 # Maximum number of statements in function / method body
 max-statements=50

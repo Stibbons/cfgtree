@@ -2,7 +2,7 @@
 
 MODULE:=cfgtree
 
-all: dev style checks requirements build dists test-unit
+all: dev style checks requirements dists test
 
 dev:
 	pipenv install --dev --skip-lock
@@ -24,7 +24,7 @@ autopep8:
 yapf:
 	pipenv run yapf --style .yapf --recursive -i $(MODULE)
 
-checks: sdist flake8 pylint
+checks: flake8 pylint
 
 flake8:
 	pipenv run python setup.py flake8
@@ -37,7 +37,7 @@ build: dists
 shell:
 	pipenv shell
 
-test-unit:
+test:
 	pipenv run pytest $(MODULE)
 
 test-coverage:
@@ -78,6 +78,4 @@ dist: dists
 install: install-system
 pypi: pypi-publish
 styles: style
-test: test-unit
-unittest: test-unit
 wheel: wheels

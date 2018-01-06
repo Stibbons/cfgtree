@@ -8,10 +8,6 @@ import json
 import logging
 import os
 import sys
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
 from typing import Any
 from typing import Dict
 
@@ -22,6 +18,8 @@ from cfgtree.storages import _ConfigStorageBase
 
 log = logging.getLogger(__name__)
 _UNDEFINED = object()
+
+# flake8: F404
 
 
 class EnvironmentConfig(object):
