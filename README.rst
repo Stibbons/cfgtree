@@ -37,6 +37,11 @@ It requires the following acknolegdment:
   - command line argument
   - configuration storage such as file (json, yaml, ini) or configuration server
 
+Similar opensource projects
+---------------------------
+
+* Openstack's `Olso.config <https://docs.openstack.org/oslo.config/latest/>`_
+
 Configuration Storage
 ---------------------
 

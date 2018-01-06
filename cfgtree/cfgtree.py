@@ -8,13 +8,13 @@ import json
 import logging
 import os
 import sys
-from typing import Any
-from typing import Dict
+# from typing import Any
+# from typing import Dict
 
 # Cfgtree modules
 from cfgtree.dictxpath import get_node_by_xpath
 from cfgtree.dictxpath import set_node_by_xpath
-from cfgtree.storages import _ConfigStorageBase
+# from cfgtree.storages import _ConfigStorageBase
 
 log = logging.getLogger(__name__)
 _UNDEFINED = object()
@@ -23,9 +23,9 @@ _UNDEFINED = object()
 
 
 class EnvironmentConfig(object):
-    cfgtree: Dict[str, Any] = None
-    environ_var_prefix: str = None
-    config_storage: _ConfigStorageBase = None
+    cfgtree = None  # : Dict[str, Any]
+    environ_var_prefix = None  # : str
+    config_storage = None  # : _ConfigStorageBase
 
     def __init__(self):
         self._inject_names()
