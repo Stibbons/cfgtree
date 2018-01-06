@@ -1,6 +1,6 @@
-===============================
-cfgtree - Configuration as Tree
-===============================
+======================================
+cfgtree - Configuration Tree made easy
+======================================
 
 .. image:: https://travis-ci.org/Stibbons/cfgtree.svg?branch=master
     :target: https://travis-ci.org/Stibbons/cfgtree
@@ -23,24 +23,68 @@ cfgtree - Configuration as Tree
 Description
 ===========
 
-This module provides an easy yet comprehensive way of defining a configuration tree
-for any application.
+This package provides an easy yet comprehensive way of describing, storing and parsing a
+user configuration.
 
-It requires the following acknolegdment:
+It requires the following acknolegdments:
 
-- Application settings are organize in a hierarchical structure, dependend of the application
-  itself. This structure is called in cfgtree: "bare config".
+- Application settings actually represents a hierarchical structure, they can be organized into
+  group of settings, subgroups, and they entierely depends on the application itself.
+
+  This structure is called in cfgtree a "bare configuration", or "configuration tree".
 
 - User settings may come from different inputs:
 
-  - environment variables (12 factors approach)
-  - command line argument
-  - configuration storage such as file (json, yaml, ini) or configuration server
+  - environment variables (12 factors approach). Example: ``MYAPP_VERBOSE``.
+  - command line argument. Example: ``--verbose``
+  - configuration storage such as file (json, yaml, ini) or configuration server. Example::
+
+        {
+            "verbose": true
+        {
 
 Similar opensource projects
 ---------------------------
 
 * Openstack's `Olso.config <https://docs.openstack.org/oslo.config/latest/>`_
+
+Overview
+========
+
+Please go to `ReadTheDocs <https://cfgtree.readthedocs.org/en/latest/>`_ for full, up-to-date
+reference documentation.
+
+Here is just a quick overview of cfgtree.
+
+Configuration Tree Description
+------------------------------
+
+Configuration hierarchy is to be described in a ``cfgtree.EnvironmentConfig`` inherited instance,
+inside the member `.cfgtree`, using helper classes such as ``StringCfg``, ``IntCfg``, ``UserCfg`` or
+``PasswordCfg``. Each setting can be set by environment variable, command line parameter or by
+the storage file(s) itself.
+
+Let's take an example of an item defined at the first level of the hierarchy. It is defined as a
+``IntCfg`` with name ``count``. User can set this setting by:
+
+- environment variable ``APPLICATIONNAME_COUNT`` (where ``APPLICATIONNAME`` is an optional,
+  developer-defined prefix added to every environment variable of the application to avoid
+  conflicts)
+- command line argument ``--count``
+- item `count` at the first level of a json file
+
+Hierarchical structure is reflected in these different ways, to avoid conflicts. Now, let's imagine
+the 'count' setting is set in a group called 'general':
+
+- environment variable is: ``APPLICATIONNAME_GENERAL_COUNT``
+- command line argument is: ``--general-count``
+- Json has a first level named ``general``, and inside one of the items is called ``count``::
+
+    {
+        "general": {
+            "count": 1
+        }
+    }
 
 Configuration Storage
 ---------------------
@@ -56,10 +100,12 @@ The trivial storage is a simple json file. The complete settings are placed insi
 But developer may want to organize in a more hierarchical structure, splitting into different files,
 etc.
 
-Another typical file format for configuration is YAML, which is more human readable and allow
-inserting comments and so.
+cfgtree allows complete customization of the file storage, developers can even develop their own.
 
-But, ultimately, all file format actually stores a hierarchical configuration.
+Another typical file format for configuration is YAML, which is more human readable and allow
+inserting comments and so. INI files is often found as configuration format, or TOML.
+
+But, ultimately, all file formats actually store settings in hierarchical configuration.
 
 Current Support:
 
@@ -71,33 +117,11 @@ Future support:
 - Set of Yaml files
 - Configuration server
 
-Configuration Tree Description
-------------------------------
+Access to settings
+------------------
 
-Configuration hierarchy is to be described in a `cfgtree.EnvironmentConfig` inherited instance,
-inside the member `.cfgtree`, using helper classes such as `StringCfg`, 'IntCfg', 'UserCfg' or
-'PasswordCfg'. Each setting can be set by environment variable, command line parameter or by
-the storage file(s) itself.
-
-Let's take an example of an item defined at the first level of the hierarchy. It is defined as a
-'IntCfg' with name 'count'. It can be set by the following:
-
-- environment variable ``APPLICATIONNAME_COUNT`` (where ``APPLICATIONNAME`` is an optional
-  developer-defined prefix added to every environment variable to avoid conflicts)
-- command line argument ``--count``
-- item `count` at the first level of a json file
-
-Hierarchical structure is reflected in these different ways, to avoid conflicts. Now, the 'count'
-setting is set in a settings section called 'general':
-
-- environment variable: ``APPLICATIONNAME_GENERAL_COUNT``
-- command line argument: ``--general-count``
-- Json has a first level named ``general``, and inside one of the items is called ``count``.
-
-XPath syntax
-------------
-
-A xpath-like syntax allows to reach any item of the configuration: ``<key1>.<key2>.<key3>.<item>``.
+In your application, an xpath-like syntax allows you to reach any item of the configuration:
+``<key1>.<key2>.<key3>.<item>``. See the documentation for full explanation.
 
 Documentation
 =============
