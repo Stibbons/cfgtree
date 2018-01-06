@@ -82,19 +82,24 @@ the storage file(s) itself.
 Let's take an example of an item defined at the first level of the hierarchy. It is defined as a
 'IntCfg' with name 'count'. It can be set by the following:
 
-- environment variable `APPLICATIONNAME_COUNT` (`APPLICATIONNAME` is an optional developer-defined
-  prefix added to every environment variable)
-- command line argument `--count`
+- environment variable ``APPLICATIONNAME_COUNT`` (where ``APPLICATIONNAME`` is an optional
+  developer-defined prefix added to every environment variable to avoid conflicts)
+- command line argument ``--count``
 - item `count` at the first level of a json file
 
 Hierarchical structure is reflected in these different ways, to avoid conflicts. Now, the 'count'
 setting is set in a settings section called 'general':
 
-- environment variable: `APPLICATIONNAME_GENERAL_COUNT`
-- command line argument: `--general-count`
-- Json has a first level named `general`, and inside one of the items is called `count`.
+- environment variable: ``APPLICATIONNAME_GENERAL_COUNT``
+- command line argument: ``--general-count``
+- Json has a first level named ``general``, and inside one of the items is called ``count``.
 
 XPath syntax
 ------------
 
-A xpath-like syntax allows to reach any item of the configuration: `<key1>.<key2>.<key3>.<item>`.
+A xpath-like syntax allows to reach any item of the configuration: ``<key1>.<key2>.<key3>.<item>``.
+
+Documentation
+=============
+
+Full documentation is provided on `ReadTheDocs <https://cfgtree.readthedocs.org/en/latest/>`_.
