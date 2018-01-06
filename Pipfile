@@ -1,21 +1,26 @@
 [[source]]
+
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 
+
 [dev-packages]
-flake8 = ">=3.4"
+
+"flake8" = ">=3.4"
 pycodestyle = ">=2.0"
 pyflakes = ">=1.6.0"
 pylint = ">=1.7"
 yapf = ">=0.18"
 cryptography = ">=1.4"
-PyYAML = ">=3.11"
+pyyaml = ">=3.11"
 pytest = ">=3.3"
 tox = "*"
 pipenv-to-requirements = ">=0.1.9"
 "flake8-coding" = "*"
 "flake8-comprehensions" = "*"
+"autopep8" = "*"
 
 
 [packages]
+
 pbr = ">=3.0"

@@ -7,14 +7,10 @@ import os
 import sys
 from pathlib import PosixPath
 
-# Third Party Libraries
-from cfgtree import LOGGER_NAME
-
-log = logging.getLogger(LOGGER_NAME)
+log = logging.getLogger(__name__)
 
 
 class _ConfigStorageBase(object):
-
     def find_config_storage(self):
         raise NotImplementedError
 

@@ -6,10 +6,7 @@ import logging
 import os
 from typing import Any
 
-# Third Party Libraries
-from cfgtree import LOGGER_NAME
-
-log = logging.getLogger(LOGGER_NAME)
+log = logging.getLogger(__name__)
 _UNDEFINED = object()
 
 
@@ -114,7 +111,6 @@ class StringCfg(_CfgBase):
 
 
 class ListOfStringCfg(_CfgBase):
-
     """
     Comma separated list of string (1 argument).
     """
@@ -147,7 +143,6 @@ class IntCfg(_CfgBase):
 
 
 class HardcodedCfg(_CfgBase):
-
     """
     Placeholder only used to store application value.
 
@@ -170,14 +165,12 @@ class HardcodedCfg(_CfgBase):
 
 
 class UserCfg(StringCfg):
-
     @property
     def user(self):
         return self.value
 
 
 class PasswordCfg(StringCfg):
-
     @property
     def password(self):
         return self.value
@@ -219,7 +212,6 @@ class BoolCfg(_CfgBase):
 
 
 class MultiChoiceCfg(ListOfStringCfg):
-
     def __init__(self, *args, choices=None, **kwargs):
         super(MultiChoiceCfg, self).__init__(*args, **kwargs)
         self.choices = choices
@@ -234,7 +226,6 @@ class MultiChoiceCfg(ListOfStringCfg):
 
 
 class SingleChoiceCfg(StringCfg):
-
     def __init__(self, *args, choices=None, **kwargs):
         super(SingleChoiceCfg, self).__init__(*args, **kwargs)
         self.choices = choices
