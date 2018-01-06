@@ -19,7 +19,8 @@ pipenv-to-requirements = ">=0.1.9"
 "flake8-coding" = "*"
 "flake8-comprehensions" = "*"
 "autopep8" = "*"
-reno = "*"
+reno = {extras = ["sphinx"]}
+sphinx = "*"
 
 
 [packages]

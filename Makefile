@@ -1,8 +1,8 @@
-.PHONY: build
+.PHONY: build docs
 
 MODULE:=cfgtree
 
-all: dev style checks requirements dists test
+all: dev style checks requirements dists test docs release-note
 
 dev:
 	pipenv install --dev --skip-lock
@@ -79,10 +79,13 @@ reno-lint:
 release-note:
 	pipenv run reno report
 
+docs:
+	cd docs && pipenv run make html
 # aliases to gracefully handle typos on poor dev's terminal
 check: checks
 devel: dev
 develop: dev
+doc: docs
 dist: dists
 install: install-system
 pypi: pypi-publish

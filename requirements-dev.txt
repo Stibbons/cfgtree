@@ -20,5 +20,6 @@ pylint>=1.7
 pytest>=3.3
 pyyaml>=3.11
 reno
+sphinx
 tox
 yapf>=0.18
