@@ -23,6 +23,36 @@ _UNDEFINED = object()
 
 
 class EnvironmentConfig(object):
+    """Main configuration class
+
+    Usage::
+
+        class MyAppConfig(EnvironmentConfig):
+
+            environ_var_prefix = "MyApp_"
+
+            config_storage = JsonConfigFile(
+                environ_var_name = "MYAPP_COMMON_CONFIG_FILE",
+                long_param_name = "--configfile",
+                short_param_name = "-g",
+                default_filename = "config.json",
+            )
+
+            cfgtree = {
+                "configfile": ConfigFileCfg(l="--configfile", h="Config directory"),
+                "version": VersionCfg(),
+                "general": {
+                    "verbose":
+                        BoolCfg(s='-v', l="--verbose", h='Enable verbose output logs'),
+                    "logfile":
+                        StringCfg(s="-l", h='Output log to file'),
+                },
+            }
+
+        cfg = MyAppConfig()
+
+    """
+
     cfgtree = None  # : Dict[str, Any]
     environ_var_prefix = None  # : str
     config_storage = None  # : _ConfigStorageBase
@@ -53,15 +83,17 @@ class EnvironmentConfig(object):
                 if item.ignore_in_cfg:
                     # log.debug("Create cfg node '%s': ignored (handled later)", item.xpath)
                     continue
-                log.debug("Create cfg node: '%s' (name: '%s', cmd line: '%s'), default  : %r",
-                          item.xpath, item.name, item.long_param, item.safe_value)
+                log.debug(
+                    "Create cfg node: '%s' (name: '%s', cmd line: '%s'), default  : %r",
+                    item.xpath, item.name, item.long_param, item.safe_value)
         # pylint: enable=no-member
 
     def set_cfg_value(self, xpath, value):
         """
         Set a value in cfgtree.
         """
-        set_node_by_xpath(self.cfgtree, xpath, value, extend=True, setter_attr="set_value")
+        set_node_by_xpath(
+            self.cfgtree, xpath, value, extend=True, setter_attr="set_value")
 
     def get_cfg_value(self, xpath, default=None):
         """

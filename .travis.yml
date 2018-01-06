@@ -9,7 +9,7 @@ python:
 
 install:
   - pip install -U pip pipenv
-  - make dev
+  - make pipenv-install-dev
 
 script:
   - make check

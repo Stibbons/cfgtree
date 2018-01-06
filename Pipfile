@@ -15,12 +15,14 @@ cryptography = ">=1.4"
 pyyaml = ">=3.11"
 pytest = ">=3.3"
 tox = "*"
-pipenv-to-requirements = ">=0.1.9"
+pipenv-to-requirements = ">=0.2.0"
 "flake8-coding" = "*"
 "flake8-comprehensions" = "*"
 "autopep8" = "*"
 reno = {extras = ["sphinx"]}
 sphinx = "*"
+"e1839a8" = {path = ".", editable = true}
+pytest-sugar = "*"
 
 
 [packages]

@@ -1,60 +1,6 @@
-=====================================
-cfgtree - App Configuration made easy
-=====================================
-
-.. image:: https://travis-ci.org/Stibbons/cfgtree.svg?branch=master
-    :target: https://travis-ci.org/Stibbons/cfgtree
-.. image:: https://readthedocs.org/projects/cfgtree/badge/?version=latest
-   :target: http://cfgtree.readthedocs.io/en/latest/?badge=latest
-   :alt: Documentation Status
-.. image:: https://coveralls.io/repos/github/Stibbons/cfgtree/badge.svg
-   :target: https://coveralls.io/github/Stibbons/cfgtree
-.. image:: https://badge.fury.io/py/cfgtree.svg
-   :target: https://pypi.python.org/pypi/cfgtree/
-   :alt: Pypi package
-.. image:: https://img.shields.io/badge/license-MIT-blue.svg
-   :target: ./LICENSE
-   :alt: MIT licensed
-
-* Free software: MIT
-* Documentation: https://cfgtree.readthedocs.org/en/latest/
-* Source: https://github.com/Stibbons/cfgtree
-
-Description
-===========
-
-This package provides an easy yet comprehensive way of describing, storing and parsing a
-user configuration.
-
-It requires the following acknolegdments:
-
-- Application settings actually represents a hierarchical structure, they can be organized into
-  group of settings, subgroups, and they entierely depends on the application itself.
-
-  This structure is called in cfgtree a "bare configuration", or "configuration tree".
-
-- User settings may come from different inputs:
-
-  - environment variables (12 factors approach). Example: ``MYAPP_VERBOSE``.
-  - command line argument. Example: ``--verbose``
-  - configuration storage such as file (json, yaml, ini) or configuration server. Example::
-
-        {
-            "verbose": true
-        {
-
-Similar opensource projects
----------------------------
-
-* Openstack's `Olso.config <https://docs.openstack.org/oslo.config/latest/>`_
 
 Overview
 ========
-
-Please go to `ReadTheDocs <https://cfgtree.readthedocs.org/en/latest/>`_ for full, up-to-date
-reference documentation.
-
-Here is just a quick overview of cfgtree.
 
 Configuration Tree Description
 ------------------------------
@@ -122,8 +68,3 @@ Access to settings
 
 In your application, an xpath-like syntax allows you to reach any item of the configuration:
 ``<key1>.<key2>.<key3>.<item>``. See the documentation for full explanation.
-
-Documentation
-=============
-
-Full documentation is provided on `ReadTheDocs <https://cfgtree.readthedocs.org/en/latest/>`_.

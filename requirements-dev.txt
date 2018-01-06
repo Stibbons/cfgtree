@@ -8,18 +8,20 @@
 # `Pipfile.lock`
 ################################################################################
 
+-e .
 autopep8
 cryptography>=1.4
 flake8-coding
 flake8-comprehensions
 flake8>=3.4
-pipenv-to-requirements>=0.1.9
+pipenv-to-requirements>=0.2.0
 pycodestyle>=2.0
 pyflakes>=1.6.0
 pylint>=1.7
+pytest-sugar
 pytest>=3.3
 pyyaml>=3.11
-reno
+reno[sphinx]
 sphinx
 tox
 yapf>=0.18

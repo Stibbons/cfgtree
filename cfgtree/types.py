@@ -165,6 +165,14 @@ class HardcodedCfg(_CfgBase):
         return None
 
 
+class FileVersionCfg(HardcodedCfg):
+    """
+    File version value.
+
+    It does not present an environment variable nor a command line argument
+    """
+
+
 class UserCfg(StringCfg):
     @property
     def user(self):
