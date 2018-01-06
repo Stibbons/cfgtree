@@ -1,5 +1,5 @@
 ===============================
-cfgtree
+cfgtree - Configuration as Tree
 ===============================
 
 .. image:: https://travis-ci.org/Stibbons/cfgtree.svg?branch=master
@@ -16,92 +16,80 @@ cfgtree
    :target: ./LICENSE
    :alt: MIT licensed
 
-Automatic configuration file, command line, environment variable parser
-
 * Free software: MIT
 * Documentation: https://cfgtree.readthedocs.org/en/latest/
 * Source: https://github.com/Stibbons/cfgtree
 
-Features
---------
+Description
+===========
 
-* TODO
+This module provides an easy yet comprehensive way of defining a configuration tree
+for any application.
 
-Usage
------
+It requires the following acknolegdment:
 
-* TODO
+- Application settings are organize in a hierarchical structure, dependend of the application
+  itself. This structure is called in cfgtree: "bare config".
 
+- User settings may come from different inputs:
 
-Note: See `pipenv documentation <https://github.com/kennethreitz/pipenv>`_ for Pipfile
-specification.
+  - environment variables (12 factors approach)
+  - command line argument
+  - configuration storage such as file (json, yaml, ini) or configuration server
 
-Contributing
+Configuration Storage
+---------------------
+
+The trivial storage is a simple json file. The complete settings are placed inside it, such as::
+
+    {
+        'setting1': 'value1',
+        'setting2': 'value2',
+        'setting3': 'value3',
+    }
+
+But developer may want to organize in a more hierarchical structure, splitting into different files,
+etc.
+
+Another typical file format for configuration is YAML, which is more human readable and allow
+inserting comments and so.
+
+But, ultimately, all file format actually stores a hierarchical configuration.
+
+Current Support:
+
+- single Json file
+
+Future support:
+
+- Yaml file (with inplace save keeping comments and overall organization)
+- Set of Yaml files
+- Configuration server
+
+Configuration Tree Description
+------------------------------
+
+Configuration hierarchy is to be described in a `cfgtree.EnvironmentConfig` inherited instance,
+inside the member `.cfgtree`, using helper classes such as `StringCfg`, 'IntCfg', 'UserCfg' or
+'PasswordCfg'. Each setting can be set by environment variable, command line parameter or by
+the storage file(s) itself.
+
+Let's take an example of an item defined at the first level of the hierarchy. It is defined as a
+'IntCfg' with name 'count'. It can be set by the following:
+
+- environment variable `APPLICATIONNAME_COUNT` (`APPLICATIONNAME` is an optional developer-defined
+  prefix added to every environment variable)
+- command line argument `--count`
+- item `count` at the first level of a json file
+
+Hierarchical structure is reflected in these different ways, to avoid conflicts. Now, the 'count'
+setting is set in a settings section called 'general':
+
+- environment variable: `APPLICATIONNAME_GENERAL_COUNT`
+- command line argument: `--general-count`
+- Json has a first level named `general`, and inside one of the items is called `count`.
+
+XPath syntax
 ------------
 
-Setup for development:
-
-    .. code-block:: bash
-
-        $ make dev
-
-Activate the virtualenv:
-
-    .. code-block:: bash
-
-        $ make shell  # equivalent to `pipenv shell`
-
-Execute unit tests:
-
-    .. code-block:: bash
-
-        $ make test-unit
-
-
-Build source package:
-
-    Use it for most package without low level system dependencies.
-
-    .. code-block:: bash
-
-        make sdist
-
-Build binary package:
-
-    Needed for package with a C or other low level source code.
-
-    .. code-block:: bash
-
-        make bdist
-
-Build Wheel package:
-
-    Always provide a wheel package.
-
-    .. code-block:: bash
-
-        make wheel
-
-To register Pipy deployment:
-
-- commit your work!
-- enable your project on Travis
-- execute ``pipenv run python travis_pypi_setup.py``
-- the ``.travis.yml`` is rewritten, you may want to restore its formatting.
-
-Create a release:
-
-    .. code-block:: bash
-
-        make release
-        git tag 1.2.3
-        make push
-
-On successful travis build on the Tag branch, your Pypi package will be updated automatically.
-
-Configuration
--------------
-
-You will need to configure `.travis.yml` to enable automatic PyPi deployment, or use the provided
-`travis_pypi_setup.py` script. Beware your Yaml file will be overwritten, you will have to set the
-format back manually.
+A xpath-like syntax allows to reach any item of the configuration: `<key1>.<key2>.<key3>.<item>`.
