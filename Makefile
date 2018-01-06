@@ -70,6 +70,12 @@ push: githook
 	git push origin --all
 	git push origin --tags
 
+reno-new:
+	pipenv run reno new slug
+
+reno-lint:
+	pipenv run reno lint
+
 release-note:
 	pipenv run reno report
 

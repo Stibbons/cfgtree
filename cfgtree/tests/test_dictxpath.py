@@ -4,7 +4,6 @@
 from unittest import TestCase
 
 # Cfgtree modules
-# cfgtree
 from cfgtree.dictxpath import delete_node_by_xpath
 from cfgtree.dictxpath import get_node_by_xpath
 from cfgtree.dictxpath import set_node_by_xpath

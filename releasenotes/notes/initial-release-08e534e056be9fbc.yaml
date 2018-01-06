@@ -1,0 +1,10 @@
+---
+prelude: >
+    First release of cfgtree.
+features:
+  - |
+    Currently supported:
+      - File storage:
+        - json
+      - Command line parser:
+        - argparse

@@ -13,7 +13,8 @@ install:
 
 script:
   - make check
-  - make test-unit
+  - make dists
+  - make test
 
 after_success:
   coveralls
