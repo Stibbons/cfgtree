@@ -79,6 +79,9 @@ reno-lint:
 release-note:
 	pipenv run reno report
 
+release-note-github:
+	pipenv run reno report | pandoc -f rst -t markdown
+
 docs:
 	cd docs && pipenv run make html
 # aliases to gracefully handle typos on poor dev's terminal
