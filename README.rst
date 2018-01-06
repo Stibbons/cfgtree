@@ -60,8 +60,8 @@ Configuration Tree Description
 ------------------------------
 
 Configuration hierarchy is to be described in a ``cfgtree.EnvironmentConfig`` inherited instance,
-inside the member `.cfgtree`, using helper classes such as ``StringCfg``, ``IntCfg``, ``UserCfg`` or
-``PasswordCfg``. Each setting can be set by environment variable, command line parameter or by
+inside the member ``.cfgtree``, using helper classes such as ``StringCfg``, ``IntCfg``, ``UserCfg``
+or ``PasswordCfg``. Each setting can be set by environment variable, command line parameter or by
 the storage file(s) itself.
 
 Let's take an example of an item defined at the first level of the hierarchy. It is defined as a

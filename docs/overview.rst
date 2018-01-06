@@ -6,8 +6,8 @@ Configuration Tree Description
 ------------------------------
 
 Configuration hierarchy is to be described in a ``cfgtree.EnvironmentConfig`` inherited instance,
-inside the member `.cfgtree`, using helper classes such as ``StringCfg``, ``IntCfg``, ``UserCfg`` or
-``PasswordCfg``. Each setting can be set by environment variable, command line parameter or by
+inside the member ``.cfgtree``, using helper classes such as ``StringCfg``, ``IntCfg``, ``UserCfg``
+or ``PasswordCfg``. Each setting can be set by environment variable, command line parameter or by
 the storage file(s) itself.
 
 Let's take an example of an item defined at the first level of the hierarchy. It is defined as a
@@ -24,18 +24,22 @@ the 'count' setting is set in a group called 'general':
 
 - environment variable is: ``APPLICATIONNAME_GENERAL_COUNT``
 - command line argument is: ``--general-count``
-- Json has a first level named ``general``, and inside one of the items is called ``count``::
+- Json has a first level named ``general``, and inside one of the items is called ``count``:
 
-    {
-        "general": {
-            "count": 1
-        }
-    }
+  .. code-block:: javascript
+
+      {
+          "general": {
+              "count": 1
+          }
+      }
 
 Configuration Storage
 ---------------------
 
-The trivial storage is a simple json file. The complete settings are placed inside it, such as::
+The trivial storage is a simple json file. The complete settings are placed inside it, such as:
+
+.. code-block:: javascript
 
     {
         'setting1': 'value1',

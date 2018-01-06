@@ -11,3 +11,4 @@ Single Json file
 ----------------
 
 .. autoclass:: cfgtree.storages.JsonFileConfigStorage
+    :members:

@@ -8,12 +8,14 @@ import json
 import logging
 import os
 import sys
-# from typing import Any
-# from typing import Dict
 
 # Cfgtree modules
 from cfgtree.dictxpath import get_node_by_xpath
 from cfgtree.dictxpath import set_node_by_xpath
+
+# from typing import Any
+# from typing import Dict
+
 # from cfgtree.storages import _ConfigStorageBase
 
 log = logging.getLogger(__name__)
@@ -25,7 +27,9 @@ _UNDEFINED = object()
 class EnvironmentConfig(object):
     """Main configuration class
 
-    Usage::
+    Usage:
+
+    .. code-block:: python
 
         class MyAppConfig(EnvironmentConfig):
 
@@ -83,17 +87,15 @@ class EnvironmentConfig(object):
                 if item.ignore_in_cfg:
                     # log.debug("Create cfg node '%s': ignored (handled later)", item.xpath)
                     continue
-                log.debug(
-                    "Create cfg node: '%s' (name: '%s', cmd line: '%s'), default  : %r",
-                    item.xpath, item.name, item.long_param, item.safe_value)
+                log.debug("Create cfg node: '%s' (name: '%s', cmd line: '%s'), default  : %r",
+                          item.xpath, item.name, item.long_param, item.safe_value)
         # pylint: enable=no-member
 
     def set_cfg_value(self, xpath, value):
         """
         Set a value in cfgtree.
         """
-        set_node_by_xpath(
-            self.cfgtree, xpath, value, extend=True, setter_attr="set_value")
+        set_node_by_xpath(self.cfgtree, xpath, value, extend=True, setter_attr="set_value")
 
     def get_cfg_value(self, xpath, default=None):
         """

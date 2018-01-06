@@ -116,6 +116,7 @@ clean:
 	rm -rf .eggs *.egg-info
 	rm -rf dist/ build/
 	rm -rf .venv
+	rm -rf docs/_build
 
 # aliases to gracefully handle typos on poor dev's terminal
 check: checks
