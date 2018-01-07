@@ -107,15 +107,21 @@ release-note-github:
 docs:
 	pipenv run make -C docs html
 
-clean:
+clean: clean-doc clean-dists clean-venv
 	pipenv --rm ; true
 	find . -name '__pycache__' -delete
 	find . -name "*.pyc" -exec rm -f {} \;
 	rm -f *.log
 	rm -f *.log.*
 	rm -rf .eggs *.egg-info
-	rm -rf dist/ build/
+
+clean-venv:
 	rm -rf .venv
+
+clean-dists:
+	rm -rf dist/ build/
+
+clean-doc:
 	rm -rf docs/_build
 
 # aliases to gracefully handle typos on poor dev's terminal
