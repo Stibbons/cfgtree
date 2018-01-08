@@ -6,7 +6,7 @@ MODULE:=cfgtree
 all: dev style checks requirements dists test docs release-note
 
 
-dev: update-pip pipenv-install-dev ln-venv
+dev: update-pip pipenv-install-dev pip-install-e ln-venv
 
 update-pip:
 	# Freeze the version of pip and pipenv for setup reproductibility
@@ -15,6 +15,9 @@ update-pip:
 pipenv-install-dev:
 	@echo "Setting up development environment"
 	pipenv install --dev
+
+pip-install-e:
+	pipenv run pip install -e .
 
 install-local:
 	pipenv install --skip-lock
@@ -85,6 +88,9 @@ pypi-publish: build
 
 update:
 	pipenv update
+
+lock:
+	pipenv lock
 
 githook: style requirements
 
