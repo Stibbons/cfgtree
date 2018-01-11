@@ -10,7 +10,7 @@ dev: update-pip pipenv-install-dev pip-install-e requirements ln-venv
 
 update-pip:
 	# Freeze the version of pip and pipenv for setup reproductibility
-	pip3 install -U --user 'pip==9.0.1' 'pipenv==9.0.1' 'setuptools>=36.6.0'
+	pip3 install -U --user 'pip==9.0.1' 'pipenv==9.0.3' 'setuptools>=36.6.0'
 
 pipenv-install-dev:
 	@echo "Setting up development environment"
@@ -71,12 +71,16 @@ wheels:
 	pipenv run python setup.py bdist_wheel
 
 
-
 test:
 	pipenv run pytest $(MODULE)
 
 test-coverage:
 	pipenv run py.test -v --cov $(MODULE) --cov-report term-missing
+
+
+sc: style check
+
+sct: style check test
 
 
 requirements:
@@ -86,13 +90,19 @@ requirements:
 pypi-publish: build
 	pipenv run python setup.py upload -r pypi
 
-update:
+
+update: pipenv-update dev
+
+pipenv-update:
 	pipenv update
+
 
 lock:
 	pipenv lock
 
+
 githook: style requirements
+
 
 push: githook
 	git push origin --all
@@ -110,8 +120,12 @@ release-note:
 release-note-github:
 	pipenv run reno report | pandoc -f rst -t markdown
 
+
 docs:
 	pipenv run make -C docs html
+
+docs-open:
+	xdg-open docs/_build/html/index.html
 
 clean: clean-doc clean-dists clean-venv
 	pipenv --rm ; true
@@ -129,6 +143,7 @@ clean-dists:
 
 clean-doc:
 	rm -rf docs/_build
+
 
 # aliases to gracefully handle typos on poor dev's terminal
 check: checks

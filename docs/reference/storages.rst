@@ -1,5 +1,5 @@
-Configuration Storage
-=====================
+Storages
+========
 
 Cfgtree does not make any assumption of the way settings are stored, appart from the fact they are
 all organized in a hierarchicla structure.
@@ -10,5 +10,16 @@ implement their own configuration file format.
 Single Json file
 ----------------
 
-.. autoclass:: cfgtree.storages.JsonFileConfigStorage
+.. autoclass:: cfgtree.storages.json.JsonFileConfigStorage
     :members:
+    :inherited-members:
+    :undoc-members:
+    :exclude-members: find_storage, get_bare_config_dict, save_bare_config_dict
+
+Base class
+----------
+
+.. autoclass:: cfgtree.storages.ConfigBaseStorage
+    :members:
+    :inherited-members:
+    :undoc-members:

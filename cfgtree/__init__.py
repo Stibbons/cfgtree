@@ -2,13 +2,15 @@
 
 import pbr.version
 
-from cfgtree.cfgtree import EnvironmentConfig
+from cfgtree._model import ConfigBaseModel
 
-__version__ = pbr.version.VersionInfo('cfgtree').release_string()
-VERSION = __version__
+
+def version():
+    """Returns the PEP440 version of the cfgtree package"""
+    return pbr.version.VersionInfo('cfgtree').release_string()
+
 
 __all__ = [
-    '__version__',
-    'EnvironmentConfig',
-    'VERSION',
+    'version',
+    'ConfigBaseModel',
 ]
