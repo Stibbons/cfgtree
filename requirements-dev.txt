@@ -13,14 +13,15 @@ cryptography>=1.4
 flake8-coding
 flake8-comprehensions
 flake8>=3.4
+isort
 pipenv-to-requirements>=0.2.0
 pycodestyle>=2.0
 pyflakes>=1.6.0
-pylint>=1.7
+pylint>=1.8
 pytest-sugar
 pytest>=3.3
 pyyaml>=3.11
 reno[sphinx]
 sphinx
-tox
+sphinx-rtd-theme
 yapf>=0.18

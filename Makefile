@@ -3,10 +3,10 @@
 MODULE:=cfgtree
 
 
-all: dev style checks requirements dists test docs release-note
+all: dev style checks dists test docs release-note
 
 
-dev: update-pip pipenv-install-dev pip-install-e ln-venv
+dev: update-pip pipenv-install-dev pip-install-e requirements ln-venv
 
 update-pip:
 	# Freeze the version of pip and pipenv for setup reproductibility
