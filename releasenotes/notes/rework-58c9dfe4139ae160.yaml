@@ -1,0 +1,9 @@
+---
+release_summary: >
+  This is the first 1.0 release. It includes a major rework of the cfgtree
+  internal code and API.
+
+upgrade:
+  - |
+    Please note the API is not compatible with previous version. You need to
+    manually update your application.

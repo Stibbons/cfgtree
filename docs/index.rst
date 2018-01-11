@@ -11,8 +11,8 @@ Welcome to Cfgtree Documentation
     :caption: Contents:
 
     overview
-    reference/cfgtree
-    reference/storages
+    model
+    reference/index
     release_notes
 
 Introduction

@@ -1,5 +1,5 @@
 ---
-prelude: >
+release_summary: >
     First release of cfgtree. It only support basic features, that was needed for the main project
     I was using it internally.
 features:

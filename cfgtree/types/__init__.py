@@ -22,14 +22,21 @@ class _CfgBase(object):
     ignore_in_args = False
     ignore_in_envvars = False
 
-    def __init__(self, l=None, s=None, h=None, r=False, d=_UNDEFINED):
+    def __init__(self,
+                 long_param=None,
+                 description=None,
+                 short_param=None,
+                 summary=None,
+                 required=False,
+                 default=_UNDEFINED):
         # Note: self.name should come later by EnvironmentConfig._inject_names()
-        self.short_param = s
-        self.help_str = h
-        self.required = r
-        self.forced_long_param = l
-        if d != _UNDEFINED:
-            self.default = d
+        self.short_param = short_param
+        self.summary = summary
+        self.description = description
+        self.required = required
+        self.forced_long_param = long_param
+        if default != _UNDEFINED:
+            self.default = default
         self._value = self.default
 
     def set_value(self, value):
@@ -47,7 +54,7 @@ class _CfgBase(object):
         self.set_value(value)
 
     @property
-    def environ_var_name(self):
+    def environ_var(self):
         return self.environ_var_prefix + self.cmd_line_name.upper()
 
     def get_cmd_line_params(self):
@@ -60,7 +67,7 @@ class _CfgBase(object):
 
     @property
     def _environ_var_value(self):
-        return os.environ.get(self.environ_var_name, _UNDEFINED)
+        return os.environ.get(self.environ_var, _UNDEFINED)
 
     def read_environ_var(self):
         return str(self._environ_var_value)
@@ -105,6 +112,12 @@ class _CfgBase(object):
 
 
 class StringCfg(_CfgBase):
+    """String value
+
+    Example::
+
+        "a value"
+    """
     default = ""
 
     def read_environ_var(self):
@@ -114,6 +127,10 @@ class StringCfg(_CfgBase):
 class ListOfStringCfg(_CfgBase):
     """
     Comma separated list of string (1 argument).
+
+    Example::
+
+        "a,b,c,d"
     """
 
     def __init__(self, *args, **kwargs):
@@ -137,17 +154,37 @@ class ListOfStringCfg(_CfgBase):
 
 
 class IntCfg(_CfgBase):
+    """Integer value
+
+    Example::
+
+        123
+    """
+
     default = 0
 
     def read_environ_var(self):
         return int(self._environ_var_value)
 
 
+class FloatCfg(_CfgBase):
+    """Float or double value
+
+    Example::
+
+        1,23
+    """
+    default = 0
+
+    def read_environ_var(self):
+        return float(self._environ_var_value)
+
+
 class HardcodedCfg(_CfgBase):
     """
     Placeholder only used to store application value.
 
-    It does not present an environment variable nor a command line argument
+    It does not present an environment variable nor a command line argument.
     """
 
     default = None
@@ -165,21 +202,24 @@ class HardcodedCfg(_CfgBase):
         return None
 
 
-class FileVersionCfg(HardcodedCfg):
+class ConfigVersionCfg(HardcodedCfg):
     """
-    File version value.
+    Version of the configuration storage.
 
     It does not present an environment variable nor a command line argument
+
+    Example::
+
+        "1.2.3"
     """
-
-
-class UserCfg(StringCfg):
-    @property
-    def user(self):
-        return self.value
 
 
 class PasswordCfg(StringCfg):
+    """Password value
+
+    This can be used to handle value while limiting its exposition
+    """
+
     @property
     def password(self):
         return self.value
@@ -193,6 +233,13 @@ class PasswordCfg(StringCfg):
 
 
 class DirNameCfg(StringCfg):
+    """Directory name
+
+    Example::
+
+        "/path/to/existing/folder"
+    """
+
     default = None
 
     def set_value(self, value):
@@ -200,15 +247,30 @@ class DirNameCfg(StringCfg):
 
 
 class ConfigFileCfg(StringCfg):
+    """Configuration file to load rest of configuration
+
+    Use to tell to your storage where the rest of the configuration should be used
+
+    Example::
+
+        "/path/to/my/config.json"
+    """
     default = None
     ignore_in_cfg = True
 
 
 class BoolCfg(_CfgBase):
+    """Boolean value
+
+    Handle automatic integer convertion
+    Example::
+
+        True
+    """
     default = False
 
     def read_environ_var(self):
-        e = os.environ.get(self.environ_var_name)
+        e = os.environ.get(self.environ_var)
         return bool(e)
 
     @property
@@ -221,6 +283,13 @@ class BoolCfg(_CfgBase):
 
 
 class MultiChoiceCfg(ListOfStringCfg):
+    """Let user choose one or mode value between several string value
+
+    Example::
+
+        "a_value"
+    """
+
     def __init__(self, *args, choices=None, **kwargs):
         super(MultiChoiceCfg, self).__init__(*args, **kwargs)
         self.choices = choices
@@ -235,6 +304,13 @@ class MultiChoiceCfg(ListOfStringCfg):
 
 
 class SingleChoiceCfg(StringCfg):
+    """Let user choose one value between several string value
+
+    Example::
+
+        "a_value"
+    """
+
     def __init__(self, *args, choices=None, **kwargs):
         super(SingleChoiceCfg, self).__init__(*args, **kwargs)
         self.choices = choices

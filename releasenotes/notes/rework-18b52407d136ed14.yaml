@@ -1,0 +1,14 @@
+---
+upgrade:
+  - |
+    rename ``EnvironmentConfig`` to ``ConfigBaseModel``
+  - |
+    add type: ``FloatCfg``
+  - |
+    rename type ``FileVersionCfg`` to ``ConfigVersionCfg``
+  - |
+    remove short parameter for type definition:
+
+      - ``l` to ``long_param``
+      - ``s` to ``short_param``
+      - ``h` to ``summary``
