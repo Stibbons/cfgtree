@@ -124,6 +124,15 @@ class StringCfg(_CfgBase):
         return str(self._environ_var_value)
 
 
+class IPCfg(StringCfg):
+    """IPv4 or IPv6 value
+
+    Example::
+
+        "192.168.0.1"
+    """
+
+
 class ListOfStringCfg(_CfgBase):
     """
     Comma separated list of string (1 argument).
@@ -165,6 +174,15 @@ class IntCfg(_CfgBase):
 
     def read_environ_var(self):
         return int(self._environ_var_value)
+
+
+class PortCfg(IntCfg):
+    """Port value, with range from 1 to 65535
+
+    Example::
+
+        49670
+    """
 
 
 class FloatCfg(_CfgBase):

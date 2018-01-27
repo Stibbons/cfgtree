@@ -45,7 +45,7 @@ class ConfigBaseModel(object):
                 # User can overwrite the configuration file name with this environment variable
                 environ_var="MYAPP_COMMON_CONFIG_FILE",
                 # or this command line parameter
-                long_param="--configfile",
+                long_param="--config-file",
                 short_param="-c",
                 # If not set, search for the `config.json` file in the current directory
                 default_filename="config.json",
@@ -57,7 +57,7 @@ class ConfigBaseModel(object):
             # Here is the main settings model for the application
             model = {
                 # Redefine configfile with ConfigFileCfg so that it appears in --help
-                "configfile": ConfigFileCfg(long_param="--configfile",
+                "configfile": ConfigFileCfg(long_param="--config-file",
                                             short_param="-c",
                                             summary="Configuration file"),
 
