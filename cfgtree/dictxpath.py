@@ -10,6 +10,11 @@ log = logging.getLogger(__name__)
 # flake8: noqa
 
 
+def make_xpath(xpath, name):
+    """make a xpath from 2 parts"""
+    return xpath + "." + name if xpath else name
+
+
 def get_node_by_xpath(mapping, xpath, default=None, ignore_errors=False,
                       handle_list_selector=False):
     '''Return the node pointed to by xpath from mapping.

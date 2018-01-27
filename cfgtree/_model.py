@@ -9,6 +9,7 @@ import os
 
 # Cfgtree modules
 from cfgtree.dictxpath import get_node_by_xpath
+from cfgtree.dictxpath import make_xpath
 from cfgtree.dictxpath import set_node_by_xpath
 
 log = logging.getLogger(__name__)
@@ -110,10 +111,6 @@ class ConfigBaseModel(object):
     def __init__(self):
         self._inject_names()
 
-    @staticmethod
-    def _mk_xpath(xpath, name):
-        return xpath + "." + name if xpath else name
-
     def _inject_names(self, root=None, xpath=None):
         """
         Inject configuration item name defined in the cfgtree dict inside each `_Cfg`.
@@ -125,10 +122,10 @@ class ConfigBaseModel(object):
         # pylint: disable=no-member
         for name, item in root.items():
             if isinstance(item, dict):
-                self._inject_names(root=item, xpath=self._mk_xpath(xpath, name))
+                self._inject_names(root=item, xpath=make_xpath(xpath, name))
             else:
                 item.name = name
-                item.xpath = self._mk_xpath(xpath, name)
+                item.xpath = make_xpath(xpath, name)
                 item.environ_var_prefix = self.environ_var_prefix
                 if item.ignore_in_cfg:
                     # log.debug("Create cfg node '%s': ignored (handled later)", item.xpath)
@@ -172,7 +169,7 @@ class ConfigBaseModel(object):
 
     def _load_cfg_dict(self, cfg, xpath=None):
         for k, v in cfg.items():
-            xp = self._mk_xpath(xpath, k)
+            xp = make_xpath(xpath, k)
             if isinstance(v, dict):
                 self._load_cfg_dict(v, xp)
             else:
@@ -188,7 +185,7 @@ class ConfigBaseModel(object):
         """
         for name, item in root.items():
             if isinstance(item, dict):
-                self._load_environment_variables(self._mk_xpath(xpath, name), item)
+                self._load_environment_variables(make_xpath(xpath, name), item)
             else:
                 if item.environ_var in os.environ:
                     if item.ignore_in_cfg:
