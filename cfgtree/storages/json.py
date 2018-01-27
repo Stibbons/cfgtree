@@ -48,7 +48,7 @@ class JsonFileConfigStorage(ConfigBaseStorage):
 
             model = {
                 # repeat in model so the arguments in described in --help
-                "configfile": ConfigFileCfg(long_param="--configfile", summary="Config file"),
+                "configfile": ConfigFileCfg(long_param="--config-file", summary="Config file"),
                 # ...
             }
 
@@ -83,7 +83,7 @@ class JsonFileConfigStorage(ConfigBaseStorage):
 
     Example::
 
-        --configfile myconfig.json
+        --config-file myconfig.json
     """
 
     __resolved_config_file = None

@@ -39,7 +39,7 @@ def cfg():
         cmd_line_parser = DummyCmdlineParser()
 
         model = {
-            "configfile": ConfigFileCfg(long_param="--configfile", summary="Config file"),
+            "configfile": ConfigFileCfg(long_param="--config-file", summary="Config file"),
             "version": ConfigVersionCfg(),
             "group1": {
                 "string_opt":
