@@ -7,3 +7,48 @@ upgrade:
   - |
     Please note the API is not compatible with previous version. You need to
     manually update your application.
+
+  - |
+    ``EnvironmentConfig`` is renamed ``ConfigBaseModel``.
+
+    ``config_storage`` is renamed ``storage``.
+
+    ``cfgtree`` is renamed ``model``.
+
+    From::
+
+        from cfgtree.cfgtree import EnvironmentConfig
+
+        class MyAppConfig(EnvironmentConfig):
+
+            config_storage = ...
+
+            cfgtree = ...
+
+            ...
+    To::
+
+        from cfgtree import ConfigBaseModel
+
+        class MyAppConfig(ConfigBaseModel):
+
+            storage = ...
+
+            model = ...
+            ...
+
+  - |
+    ``DopplerrJsonConfigFile`` has been moved to ``cfgtree.storages.json`` and its fields has
+    been renamed.
+
+  - |
+    Type short argument ``h=``, ``l=``, ``s=`` has been renamed to more meaningful name.
+
+    - ``l=``: ``long_param``
+    - ``s=``: ``short_param``
+    - ``h=``: ``summary``
+    - ``r=``: ``required``
+
+deprecations:
+  - |
+    Type ``UserCfg`` has been deprecated. Use ``StringCfg`` instead.
