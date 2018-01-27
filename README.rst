@@ -2,13 +2,13 @@
 cfgtree - App Configuration made easy
 =====================================
 
-.. image:: https://travis-ci.org/Stibbons/cfgtree.svg?branch=master
-    :target: https://travis-ci.org/Stibbons/cfgtree
+.. image:: https://travis-ci.org/gsemet/cfgtree.svg?branch=master
+    :target: https://travis-ci.org/gsemet/cfgtree
 .. image:: https://readthedocs.org/projects/cfgtree/badge/?version=latest
    :target: http://cfgtree.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
-.. image:: https://coveralls.io/repos/github/Stibbons/cfgtree/badge.svg
-   :target: https://coveralls.io/github/Stibbons/cfgtree
+.. image:: https://coveralls.io/repos/github/gsemet/cfgtree/badge.svg
+   :target: https://coveralls.io/github/gsemet/cfgtree
 .. image:: https://badge.fury.io/py/cfgtree.svg
    :target: https://pypi.python.org/pypi/cfgtree/
    :alt: Pypi package
@@ -18,7 +18,7 @@ cfgtree - App Configuration made easy
 
 * Free software: MIT
 * Documentation: https://cfgtree.readthedocs.org/en/latest/
-* Source: https://github.com/Stibbons/cfgtree
+* Source: https://github.com/gsemet/cfgtree
 
 Description
 ===========
