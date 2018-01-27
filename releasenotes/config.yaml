@@ -8,6 +8,7 @@ sections:
   - [issues, Known Issues]
   - [upgrade, Upgrade Notes]
   - [api, API Changes]
+  - [deprecations, Deprecations]
   - [fixes, Bug Fixes]
 # Change prelude_section_name to 'release_summary' from default value
 # 'prelude'.
