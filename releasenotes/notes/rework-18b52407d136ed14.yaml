@@ -9,6 +9,6 @@ upgrade:
   - |
     remove short parameter for type definition:
 
-      - ``l` to ``long_param``
-      - ``s` to ``short_param``
-      - ``h` to ``summary``
+      - ``l`` to ``long_param``
+      - ``s`` to ``short_param``
+      - ``h`` to ``summary``
