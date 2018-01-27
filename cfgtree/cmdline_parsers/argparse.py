@@ -7,6 +7,7 @@ import sys
 
 # Cfgtree modules
 from cfgtree.cmdline_parsers import CmdlineParsersBase
+from cfgtree.dictxpath import make_xpath
 from cfgtree.types import _UNDEFINED
 
 log = logging.getLogger(__name__)
@@ -40,7 +41,7 @@ class ArgparseCmdlineParser(CmdlineParsersBase):
         # pylint: disable=no-member
         for name, item in root.items():
             if isinstance(item, dict):
-                self._inject_cfg_in_parser(parser, xpath=self._mk_xpath(xpath, name), root=item)
+                self._inject_cfg_in_parser(parser, xpath=make_xpath(xpath, name), root=item)
             else:
                 if item.ignore_in_args:
                     continue
