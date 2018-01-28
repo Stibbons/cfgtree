@@ -24,6 +24,8 @@ pytest-sugar
 pytest>=3.3
 pyyaml>=3.11
 reno[sphinx]
+ruamel.yaml>=0.15
 sphinx
 sphinx-rtd-theme
+toml
 yapf>=0.18
