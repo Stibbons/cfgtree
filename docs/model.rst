@@ -2,7 +2,7 @@ Model
 =====
 
 The core part of cfgtree is the definition of the model. A "model" is a Python dictionary that
-describes the hierarchical organization of your settings, like a data schema.
+describes the hierarchical organization of your settings, like JSON Schema.
 
 For example, if I want to organize my settings into two groups, one "general" and one "others",
 I would place the descriptions in a model such as:
@@ -18,7 +18,20 @@ I would place the descriptions in a model such as:
         },
     }
 
-Here an example of a comdel:
+Various setting types are provided, covering most of the data types to be stored in configuration a
+file.
+
+For example, ``StringCfg`` descrive a string value, ``IntCfg`` any integer, ``BoolCfg`` a boolean
+and so on.
+
+Each type has the same base arguments, such as:
+
+- ``summary``: human readable short description
+- ``description``: human readable long and exhauxtive description
+- ``short_param``: which short command line argument to expose (ex: ``-c``)
+- ``long_param``: which long command line argument to expose (ex: ``--config-file``)
+
+Here an example of a complex model:
 
 .. code-block:: Python
 

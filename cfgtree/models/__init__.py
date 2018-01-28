@@ -108,7 +108,18 @@ class ConfigBaseModel(object):
 
     Should be a class inheriting from CmdlineParsersBase"""
 
-    def __init__(self, model=None, environ_var_prefix=None, storage=None, cmd_line_parser=None):
+    autosave = False
+    """Automatically write on change on file support
+
+    Note some storage might automatically reflect all changes
+    """
+
+    def __init__(self,
+                 model=None,
+                 environ_var_prefix=None,
+                 storage=None,
+                 cmd_line_parser=None,
+                 autosave=False):
         """Construct your configuration object
 
         Optional arguments.
@@ -116,6 +127,7 @@ class ConfigBaseModel(object):
             environ_var_prefix ([type], optional): Defaults to None. environment variable prefix
             storage ([type], optional): Defaults to None. storage class
             cmd_line_parser ([type], optional): Defaults to None. command line parser
+            autosave ([type], optional): Defaults to None. command line parser
         """
         if model and self.model is None:
             self.model = model
@@ -125,6 +137,8 @@ class ConfigBaseModel(object):
             self.storage = storage
         if cmd_line_parser and self.cmd_line_parser is None:
             self.cmd_line_parser = cmd_line_parser
+        if autosave and self.autosave:
+            self.autosave = autosave
         self._inject_names()
 
     def _inject_names(self, root=None, xpath=None):
@@ -150,11 +164,19 @@ class ConfigBaseModel(object):
                           item.xpath, item.name, item.long_param, item.safe_value)
         # pylint: enable=no-member
 
+    def enable_autosave(self):
+        self.autosave = True
+
+    def disable_autosave(self):
+        self.autosave = False
+
     def set_cfg_value(self, xpath, value):
         """
         Set a value in cfgtree.
         """
         set_node_by_xpath(self.model, xpath, value, extend=True, setter_attr="set_value")
+        if self.autosave:
+            self.save_configuration()
 
     def get_cfg_value(self, xpath, default=None):
         """
