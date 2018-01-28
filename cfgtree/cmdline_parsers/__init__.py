@@ -2,7 +2,7 @@
 
 
 class CmdlineParsersBase(object):
-    def parse_cmd_line(self, model):
+    def parse_cmd_line(self, model, argv=None):
         pass
 
     def _find_cfg_for_cmd_line_name(self, root, cmd_line_name):

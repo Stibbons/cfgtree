@@ -1,6 +1,7 @@
 .PHONY: build docs
 
 MODULE:=cfgtree
+SLUG:=slug
 
 
 all: dev style checks dists test docs release-note
@@ -82,6 +83,8 @@ sc: style check
 
 sct: style check test
 
+sctd: style check test docs
+
 
 requirements:
 	# needed until PBR supports `Pipfile`
@@ -109,7 +112,7 @@ push: githook
 	git push origin --tags
 
 reno-new:
-	pipenv run reno new slug
+	pipenv run reno new $(SLUG)
 
 reno-lint:
 	pipenv run reno lint

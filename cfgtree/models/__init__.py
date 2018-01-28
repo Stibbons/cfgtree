@@ -108,7 +108,23 @@ class ConfigBaseModel(object):
 
     Should be a class inheriting from CmdlineParsersBase"""
 
-    def __init__(self):
+    def __init__(self, model=None, environ_var_prefix=None, storage=None, cmd_line_parser=None):
+        """Construct your configuration object
+
+        Optional arguments.
+            model ([type], optional): Defaults to None. Model to define
+            environ_var_prefix ([type], optional): Defaults to None. environment variable prefix
+            storage ([type], optional): Defaults to None. storage class
+            cmd_line_parser ([type], optional): Defaults to None. command line parser
+        """
+        if model and self.model is None:
+            self.model = model
+        if environ_var_prefix and self.environ_var_prefix is None:
+            self.environ_var_prefix = environ_var_prefix
+        if storage and self.storage is None:
+            self.storage = storage
+        if cmd_line_parser and self.cmd_line_parser is None:
+            self.cmd_line_parser = cmd_line_parser
         self._inject_names()
 
     def _inject_names(self, root=None, xpath=None):
@@ -146,18 +162,19 @@ class ConfigBaseModel(object):
         """
         return get_node_by_xpath(self.model, xpath, default=default).value
 
-    def find_configuration_values(self):
+    def find_configuration_values(self, argv=None):
         """Main cfgtree entrypoint"""
-        self._load_configuration()
+        self._load_configuration(argv=argv)
         self._load_environment_variables("", self.model)
-        self._load_cmd_line_arg()
+        self._load_cmd_line_arg(argv)
 
-    def _load_cmd_line_arg(self):
-        self.cmd_line_parser.parse_cmd_line(self.model)
+    def _load_cmd_line_arg(self, argv=None):
+        if self.cmd_line_parser:
+            self.cmd_line_parser.parse_cmd_line(self.model, argv)
 
-    def _load_configuration(self):
+    def _load_configuration(self, argv=None):
         log.debug("Looking for configuration")
-        self.storage.find_storage()
+        self.storage.find_storage(self.model, argv=argv)
         bare_cfg = self.storage.get_bare_config_dict()
         self._load_cfg_dict(bare_cfg)
 
@@ -186,14 +203,13 @@ class ConfigBaseModel(object):
         for name, item in root.items():
             if isinstance(item, dict):
                 self._load_environment_variables(make_xpath(xpath, name), item)
-            else:
-                if item.environ_var in os.environ:
-                    if item.ignore_in_cfg:
-                        log.debug("Ignoring environment variable %s", item.environ_var)
-                    val = item.read_environ_var()
-                    log.debug("Found environment variable '%s': %s (conf: %s)", item.environ_var,
-                              val, item.xpath)
-                    item.value = val
+            elif item.environ_var and item.environ_var in os.environ:
+                if item.ignore_in_cfg:
+                    log.debug("Ignoring environment variable %s", item.environ_var)
+                val = item.read_environ_var()
+                log.debug("Found environment variable '%s': %s (conf: %s)", item.environ_var, val,
+                          item.xpath)
+                item.value = val
 
     def _dict(self, root=None, safe=False):
         """

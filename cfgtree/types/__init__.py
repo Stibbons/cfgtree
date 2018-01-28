@@ -55,7 +55,8 @@ class _CfgBase(object):
 
     @property
     def environ_var(self):
-        return self.environ_var_prefix + self.cmd_line_name.upper()
+        if self.environ_var_prefix:
+            return self.environ_var_prefix + self.cmd_line_name.upper()
 
     def get_cmd_line_params(self):
         a = []
@@ -275,6 +276,10 @@ class ConfigFileCfg(StringCfg):
     """
     default = None
     ignore_in_cfg = True
+
+    def __init__(self, *args, default_filename=None, **kwargs):
+        self.default_filename = default_filename
+        super(ConfigFileCfg, self).__init__(*args, **kwargs)
 
 
 class BoolCfg(_CfgBase):

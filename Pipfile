@@ -23,8 +23,12 @@ reno = {extras = ["sphinx"]}
 sphinx = "*"
 pytest-sugar = "*"
 sphinx-rtd-theme = "*"
+toml = "*"
+"ruamel.yaml" = ">=0.15"
 
 
 [packages]
 
 pbr = ">=3.0"
+anyconfig = "*"
+jsonschema = "*"
