@@ -79,11 +79,11 @@ test-coverage:
 	pipenv run py.test -v --cov $(MODULE) --cov-report term-missing
 
 
-sc: style check
+sc: style check requirements
 
-sct: style check test
+sct: style check test requirements
 
-sctd: style check test docs
+sctd: style check test docs requirements
 
 
 requirements:
