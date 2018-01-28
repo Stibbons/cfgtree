@@ -1,0 +1,11 @@
+---
+release_summary: >
+  This release add support for AnyConfig
+features:
+  - |
+    New model: ``cfgtree.models.anyconfig.AnyConfigModel``, that automatically loads configuration
+    file from a large variety of file formats: ini, json, pickle, properties, shellvars, xml, yaml
+  - |
+    No more need to specify both ``ConfigFileCfg`` and ``default_filename`` in storage class.
+    Now, when trying to load the configuration file, the models search for a ``ConfigFileCfg``
+    type argument and inject its ``default_filename`` value.

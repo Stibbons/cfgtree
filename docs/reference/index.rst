@@ -5,7 +5,7 @@ CfgTree API Reference
     :maxdepth: 2
     :caption: Contents:
 
-    model
+    recipes
+    types
     storages
     cmdline_parsers
-    types

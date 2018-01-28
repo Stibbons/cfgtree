@@ -14,11 +14,14 @@ log = logging.getLogger(__name__)
 
 
 class ArgparseCmdlineParser(CmdlineParsersBase):
-    def parse_cmd_line(self, model):
+    def parse_cmd_line(self, model, argv=None):
         """
         Inject parameters provider by the user in the command line.
         """
-        argv = sys.argv[1:]
+        if argv is None:
+            argv = sys.argv
+
+        argv = argv[1:]
 
         parser = argparse.ArgumentParser()
         self._inject_cfg_in_parser(parser, root=model)

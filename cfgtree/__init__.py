@@ -2,7 +2,7 @@
 
 import pbr.version
 
-from cfgtree._model import ConfigBaseModel
+from cfgtree.models import ConfigBaseModel
 
 
 def version():

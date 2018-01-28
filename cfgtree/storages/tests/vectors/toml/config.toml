@@ -1,0 +1,12 @@
+version = 1
+
+[group1]
+string_opt = "a string"
+int_opt = 123
+float_opt = 2.0
+bool_opt = true
+list_opt = [ "a", "b", "c",]
+
+[group1.dict_opt]
+key1 = "val1"
+key2 = "val2"
