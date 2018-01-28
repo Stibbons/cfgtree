@@ -18,21 +18,22 @@ Welcome to Cfgtree Documentation
 Introduction
 ------------
 
-``cfgtree`` provides an easy yet comprehensive way of describing, storing and parsing a
-user configuration for you Python application.
+This package provides an easy yet comprehensive way of describing, storing, parsing, modifying
+user configuration for a modern application.
 
 It requires the following acknolegdments:
 
-- Application settings actually represents a hierarchical structure, they can be organized into
+- Application settings are stored in a hierarchical structure, they can be organized into
   group of settings, subgroups, and they entierely depends on the application itself.
 
-  This structure is called in Cfgtree a "bare configuration", or "configuration tree".
+  This structure is called in cfgtree a "bare configuration", or "configuration tree", and is
+  described by a "model".
 
 - User settings may come from different inputs:
 
-  - environment variables (12 factors approach). Example: ``MYAPP_VERBOSE=1``.
+  - environment variables ("12-factors" approach). Example: ``MYAPP_VERBOSE``.
   - command line argument. Example: ``--verbose``
-  - configuration storage such as file (JSON, YAML, INI) or even configuration server. Example:
+  - configuration storage such as file (json, yaml, ini) or configuration server. Example:
 
     .. code-block:: javascript
 

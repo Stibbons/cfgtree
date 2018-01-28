@@ -29,7 +29,7 @@ class _CfgBase(object):
                  summary=None,
                  required=False,
                  default=_UNDEFINED):
-        # Note: self.name should come later by EnvironmentConfig._inject_names()
+        # Note: self.name should come later by ConfigBaseModel._inject_names()
         self.short_param = short_param
         self.summary = summary
         self.description = description
