@@ -42,33 +42,56 @@ The trivial storage is a simple json file. The complete settings are placed insi
 .. code-block:: javascript
 
     {
-        'setting1': 'value1',
-        'setting2': 'value2',
-        'setting3': 'value3',
+        "group1": {
+            "string_opt": "a string",
+            "int_opt": 123,
+            "float_opt": 2.0,
+            "bool_opt": true
+        }
     }
 
-But developer may want to organize in a more hierarchical structure, splitting into different files,
-etc.
-
 cfgtree allows complete customization of the file storage, developers can even develop their own.
-
-Another typical file format for configuration is YAML, which is more human readable and allow
-inserting comments and so. INI files is often found as configuration format, or TOML.
-
-But, ultimately, all file formats actually store settings in hierarchical configuration.
 
 Current Support:
 
 - single Json file
+- Anyconfig supported file type (yaml, toml, json,...)
 
 Future support:
 
-- Yaml file (with inplace save keeping comments and overall organization)
-- Set of Yaml files
+- Multiple file example
 - Configuration server
 
 Access to settings
 ------------------
 
-In your application, an xpath-like syntax allows you to reach any item of the configuration:
-``<key1>.<key2>.<key3>.<item>``. See the documentation for full explanation.
+In your application, an xpath-like syntax allows you to reach any item of the configuration, using a
+xpath-like syntax ``<key1>.<key2>.<key3>.<item>``, for example:
+
+.. code-block:: python
+
+    cfg = AnyConfigModel(model={
+        "group1": {
+            "string_opt": StringCfg(
+                short_param='-s',
+                long_param="--string-opt",
+                summary='Help msg string'),
+            "int_opt": IntCfg(
+                short_param='-i',
+                long_param="--int-opt",
+                summary='Help msg int'),
+            "float_opt": FloatCfg(
+                short_param='-f',
+                long_param="--float-opt",
+                summary='Help msg float'),
+            "bool_opt": BoolCfg(
+                short_param='-b',
+                long_param="--bool-opt",
+                summary='Help msg bool'),
+    })
+
+Setting values can be done by:
+
+.. code-block:: python
+
+    cfg.set_cfg_value("group1.float_opt", 2.0)
