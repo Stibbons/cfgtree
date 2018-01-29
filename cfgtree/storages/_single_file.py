@@ -92,3 +92,6 @@ class SingleFileStorage(ConfigBaseStorage):
 
     def get_bare_config_dict(self):
         return self.__bare_config_dict
+
+    def get_config_file(self):
+        return self.__resolved_config_file

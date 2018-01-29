@@ -33,29 +33,21 @@ class AnyConfigStorage(SingleFileStorage):
 
             environ_var_prefix = "MYAPP_"
 
-            storage = AnyConfigStorage(
-                environ_var="MYAPP_COMMON_CONFIG_FILE",
-                long_param="--config",
-                short_param="-c",
-                default_filename="config.json",
-            )
-
             cmd_line_parser = # ...
 
             model = {
-                # repeat in model so the arguments in described in --help
-                "configfile": ConfigFileCfg(long_param="--config-file", summary="Config file"),
+                "configfile": ConfigFileCfg(default_filename="config.yaml",
+                                            long_param="--config-file", summary="Config file"),
                 # ...
             }
-
     """
 
     default_filename = None
-    """Default filename for the configuration file
+    """Default filename for the configuration file (handled by anyconfig)
 
     Example::
 
-        myconfig.json
+        myconfig.yaml
     """
 
     environ_var = None
@@ -63,7 +55,7 @@ class AnyConfigStorage(SingleFileStorage):
 
     Example::
 
-       DOPPLERR_COMMON_CONFIG_FILE="myconfig.json"
+       DOPPLERR_COMMON_CONFIG_FILE="myconfig.yaml"
     """
 
     short_param = None
@@ -71,7 +63,7 @@ class AnyConfigStorage(SingleFileStorage):
 
     Example::
 
-        -g myconfig.json
+        -g myconfig.yaml
     """
 
     long_param = None
@@ -79,11 +71,11 @@ class AnyConfigStorage(SingleFileStorage):
 
     Example::
 
-        --config-file myconfig.json
+        --config-file myconfig.yaml
     """
 
     def load_bare_config(self, config_file_path: Path):
         return anyconfig.load(config_file_path.absolute().as_posix())
 
     def save_bare_config_dict(self, bare_cfg: Dict):
-        return anyconfig.dump(bare_cfg, self.__resolved_config_file)
+        return anyconfig.dump(bare_cfg, self.get_config_file())

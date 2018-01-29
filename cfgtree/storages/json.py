@@ -34,7 +34,7 @@ class JsonFileConfigStorage(SingleFileStorage):
 
         class MyAppConfig(ConfigBaseModel):
 
-            environ_var_prefix = "MYAPP_"
+            ...
 
             storage = JsonFileConfigStorage(
                 environ_var="MYAPP_COMMON_CONFIG_FILE",
@@ -43,25 +43,19 @@ class JsonFileConfigStorage(SingleFileStorage):
                 default_filename="config.json",
             )
 
-            cmd_line_parser = # ...
-
-            model = {
-                # repeat in model so the arguments in described in --help
-                "configfile": ConfigFileCfg(long_param="--config-file", summary="Config file"),
-                # ...
-            }
+            ...
 
     """
 
-    json_configstorage_default_filename = None
-    """Default filename for the configuration file
+    default_filename = None
+    """Default filename for the JSON configuration file
 
     Example::
 
         myconfig.json
     """
 
-    json_configstorage_environ_var = None
+    environ_var = None
     """Environment variable to set the configuration file name
 
     Example::
@@ -69,7 +63,7 @@ class JsonFileConfigStorage(SingleFileStorage):
        DOPPLERR_COMMON_CONFIG_FILE="myconfig.json"
     """
 
-    json_configstorage_short_param = None
+    short_param = None
     """Short parameter to specify the configure file name
 
     Example::
@@ -77,7 +71,7 @@ class JsonFileConfigStorage(SingleFileStorage):
         -g myconfig.json
     """
 
-    json_configstorage_long_param = None
+    long_param = None
     """Short parameter to specify the configure file name
 
     Example::
@@ -90,5 +84,5 @@ class JsonFileConfigStorage(SingleFileStorage):
             return json.load(f)
 
     def save_bare_config_dict(self, bare_cfg):
-        with PosixPath(self.__resolved_config_file).open('w') as f:
+        with PosixPath(self.get_config_file()).open('w') as f:
             f.write(json.dumps(bare_cfg, sort_keys=True, indent=4, separators=(',', ': ')))
