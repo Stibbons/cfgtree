@@ -2,6 +2,7 @@
 
 # Standard Libraries
 import argparse
+from typing import Any
 import logging
 import os
 
@@ -13,22 +14,37 @@ _UNDEFINED = object()
 
 class _CfgBase(object):
 
-    default = None
-    name = None
-    xpath = None
-    arg_type = None
-    environ_var_prefix = None
-    ignore_in_cfg = False
-    ignore_in_args = False
-    ignore_in_envvars = False
+    default = None  # type: Any
+    """Default value"""
+
+    name = None  # type: str
+    """name of the item"""
+
+    xpath = None  # type: atr
+    """xpath to reach this element"""
+
+    arg_type = None  # type: str
+    """argument type"""
+
+    environ_var_prefix = None  # type: str
+    """prefix to use for environemn"""
+
+    ignore_in_cfg = False  # type: bool
+    """ """
+
+    ignore_in_args = False  # type: bool
+    """ """
+
+    ignore_in_envvars = False  # type: bool
+    """ """
 
     def __init__(self,
-                 long_param=None,
-                 description=None,
-                 short_param=None,
-                 summary=None,
-                 required=False,
-                 default=_UNDEFINED):
+                 long_param: str = None,
+                 description: str = None,
+                 short_param: str = None,
+                 summary: str = None,
+                 required: bool = False,
+                 default: Any = _UNDEFINED):
         # Note: self.name should come later by ConfigBaseModel._inject_names()
         self.short_param = short_param
         self.summary = summary
@@ -290,7 +306,7 @@ class BoolCfg(_CfgBase):
 
         True
     """
-    default = False
+    default = False  # type: Any
 
     def read_environ_var(self):
         e = os.environ.get(self.environ_var)
